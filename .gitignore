@@ -1,4 +1,11 @@
 # Ignore Python virtual environment
-
 venv/
 .venv/
+
+# Ignore everything in data/inputs except .gitkeep
+data/inputs/*
+!data/inputs/.gitkeep
+
+# Ignore everything in data/outputs except .gitkeep
+data/outputs/*
+!data/outputs/.gitkeep
