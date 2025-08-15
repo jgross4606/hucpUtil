@@ -95,8 +95,9 @@ def processData(runName, pathToData = pathToData, masterName = masterName, dneNa
     for col in colsToCheck:
         masterNoDuplicates.drop_duplicates(subset = col, keep = 'first', inplace = True)
     masterNoDuplicates = masterNoDuplicates.sort_values('VC Firm')
-
+    
     # Save output
+    masterNoDuplicates = masterNoDuplicates.drop(columns = ['AlphaNumeric', 'isEmail'], axis = 0)
     masterNoDuplicates.to_csv(f'{pathToData}/{runName}/output.csv', index = False)
 
     return masterNoDuplicates
@@ -167,8 +168,6 @@ def analyzeDuplicates(df):
     logger.info(f"\n{duplicatesMatrix}")
 
     exactDuplicates = gatherExactDuplicates(df)
-
-    exactDuplicates.to_csv('debug.csv')
     ExactDuplicatesMatrix = computeDuplicatesMatrix(exactDuplicates)
 
     logger.info(f"\n\nExact Duplicates\n{'-'*100}")
@@ -208,7 +207,6 @@ def main():
 
     # Process Data
     processData(*args)
-
 
     logger.info('\n')   
 
